@@ -4,7 +4,7 @@ const {ObjectId} = mongoose.Schema.Types;
 
 const posterProfileSchema = new Schema({
     PosterId:{
-        type: ObjectId,
+        type: ObjectI,
         ref: "PosterAuth",
     },
     Name: {
