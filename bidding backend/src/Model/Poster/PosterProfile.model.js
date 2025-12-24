@@ -1,10 +1,10 @@
 import mongoose,{Schema} from "mongoose";
 
-const {ObjectIdId} = mongoose.Schema.Types;
+const {ObjectId} = mongoose.Schema.Types;
 
 const posterProfileSchema = new Schema({
     PosterId:{
-        type: ObjectIdId,
+        type: ObjectId,
         ref: "PosterAuth",
     },
     Name: {
