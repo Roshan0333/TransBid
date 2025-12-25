@@ -90,4 +90,4 @@ const updateBidderProfile = async (res, req) => {
 }
 
 
-export { createBidderProfile };
+export { createBidderProfile, getBidderProfile, updateBidderProfile };

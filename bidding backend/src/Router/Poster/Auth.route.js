@@ -4,7 +4,7 @@ import { otpSend } from "../../Controller/Common/optSend.controllors.js";
 import checkDuplicateEmail from "../../Middleware/Common/checkDuplicateEmail.middleware.js";
 import isEmailPresentOr_Not from "../../Middleware/Poster/isEmailPresentOr_Not.middleware.js";
 
-let router = Router();
+const router = Router();
 
 router.route("/Signup").post(checkDuplicateEmail, Signup);
 router.route("/Login").post(isEmailPresentOr_Not, Login);
