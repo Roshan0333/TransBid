@@ -1,4 +1,4 @@
-import DatabaseConfig  from "./Database/Database.config.js";
+import DatabaseConfig  from "./Config/Database.config.js";
 import dotenv from "dotenv";
 import app from "./app.js";
 

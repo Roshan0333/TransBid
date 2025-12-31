@@ -1,4 +1,4 @@
-import Razorpay from '../../Payment/config.js';
+import Razorpay from '../../Config/payment.config.js';
 import Crypto from "crypto";
 import Payment from "../../Model//Bidder/Subscription.models.js";
 import BidderProfile_Model from "../../Model/Bidder/BidderProfie.model.js";
