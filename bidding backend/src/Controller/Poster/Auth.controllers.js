@@ -38,7 +38,7 @@ let Login = asyncHandler(async (req, res) => {
         let decryptPasswordResult = await passwordDecrypt(password, encryptedPassword);
 
         if (!decryptPasswordResult) {
-            return res.status(401).json({ msg: "Your Enter Password is Incorrect." })
+            return res.status(401).json(new ApiError(401, "Your Enter Password is Incorrect."))
         }
 
         userDetail.Password = undefined;
