@@ -1,6 +1,7 @@
 import { useState } from "react"
 import logo from "../../assets/logo/logo.png";
 import Styles from "../../css/auth.module.css";
+import PopupMessage from "../../components/PopupMessage/PopupMessage";
 import { axiosPostService } from "../../service/axios";
 
 function Signup() {
@@ -14,7 +15,7 @@ function Signup() {
     const [popMessage, setPopMessage] = useState("");
 
     const hasSpecialSymbol = (value) => {
-        let specialSymbol = "/[@$#!%&*]/";
+        let specialSymbol = /[@$#!%&*]/;
         return specialSymbol.test(value);
     }
 
@@ -36,9 +37,11 @@ function Signup() {
         e.preventDefault();
 
         if (!email || !password || !confirmPassword) {
-            setPopMessage("All Field Fill is Required");
+            setPopMessage("All Field Fill is Required.");
             setPopFlag(prev => !prev);
             offPopMessage();
+
+            console.log(email, password, confirmPassword)
         }
         else {
             if (password.length > 8) {
@@ -84,7 +87,7 @@ function Signup() {
             }
             let result = await axiosPostService(`${userType}/auth/Signup`, formData);
 
-            setPopMessage(result);
+            setPopMessage(result.message);
             setPopFlag(prev => !prev);
             offPopMessage()
         }
@@ -93,29 +96,28 @@ function Signup() {
 
     return (
         <div className={Styles.mainDiv}>
-            {popFlag && <div className={Styles.popMessageDiv}><p className={Styles.popMessage}>{popMessage}</p></div>}
+
+            {popFlag && <PopupMessage message={popMessage}/>}
+
             <div className={Styles.mainContentDiv}>
-                    <img src={logo} className={Styles.companyLogo} alt="Company Logo"/>
+                <img src={logo} className={Styles.companyLogo} alt="Company Logo" />
 
                 <form className={Styles.formDiv}>
 
                     <div className={Styles.inputDiv}>
-                        {/* <label className={Styles.inputLabel}>Email</label> */}
                         <input type="email" placeholder="Email" className={Styles.inputField} onChange={(e) => setEmail(e.target.value)} />
                     </div>
 
                     <div className={Styles.inputDiv}>
-                        {/* <label className={Styles.inputLabel}>Password</label> */}
-                        <input type="password" placeholder="Password" className={Styles.inputField} onClick={(e) => setPassword(e.target.value)} />
+                        <input type="password" placeholder="Password" className={Styles.inputField} onChange={(e) => setPassword(e.target.value)} />
                     </div>
 
                     <div className={Styles.inputDiv}>
-                        {/* <label className={Styles.inputLabel}>Confirm Password</label> */}
-                        <input type="text" placeholder="Confirm Password" className={Styles.inputField} onClick={(e) => setConfirmPassword(e.target.value)} />
+                        <input type="text" placeholder="Confirm Password" className={Styles.inputField} onChange={(e) => setConfirmPassword(e.target.value)} />
                     </div>
 
                     <button type="submit" className={Styles.submitBtn} onClick={(e) => SignupMethod(e)}>Signup</button>
-                    
+
                     <p className={Styles.para}>Signup as <span className={Styles.link} onClick={() => setUserType("bidder")}>Contractor</span></p>
                     <p className={Styles.para}>Already have an account?<span className={Styles.link}>Login</span></p>
 

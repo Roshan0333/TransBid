@@ -47,12 +47,6 @@
     align-content: center;
 }
 
-/* .inputLabel{
-    width: 33%;
-    font-size: 18px;
-    color: #084c81;
-} */
-
 .inputField {
     width: 85%;
     height: 100%;
@@ -83,6 +77,7 @@ input::placeholder {
 .link {
     color: #084c81;
 }
+
 
 @media (max-width: 770px) {
     .mainContentDiv {

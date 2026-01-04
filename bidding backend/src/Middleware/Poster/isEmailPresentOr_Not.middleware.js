@@ -1,4 +1,5 @@
 import PosterAuthModel from "../../Model/Poster/auth.model.js";
+import { ApiError } from "../../utils/api-error.js";
 
 const isEmailPresentOrNot = async (req, res, next) => {
     try {
@@ -7,14 +8,14 @@ const isEmailPresentOrNot = async (req, res, next) => {
         let isEmailPresent = await PosterAuthModel.findOne({ Email: email });
 
         if (!isEmailPresent) {
-            return res.status(404).json({ msg: "Incorrect Email" });
+            return res.status(404).json(new ApiError(404,  "Incorrect Email"));
         }
         
         next()
 
     }
     catch (err) {
-        return res.status(500).json({ msg: err.message })
+        return res.status(500).json(new ApiError(500, err.message));
     }
 }
 

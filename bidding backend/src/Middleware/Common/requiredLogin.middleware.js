@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import CookiesForUser from "../../utils/cookiesForUser.js"
+import { ApiError } from "../../utils/api-error.js";
 
 const jwt_Secert_Key = process.env.Secert_Key;
 
@@ -8,7 +9,7 @@ const requiredLogin = async (req, res, next) => {
     const userRefreshToken = req.cookies?.RefreshToken;
 
     if (!userRefreshToken) {
-        return res.status(401).json({ msg: "Please Login for Continue" });
+        return res.status(401).json(new ApiError(401, "Please Login for Continue"));
     }
     else {
         try {
@@ -26,7 +27,7 @@ const requiredLogin = async (req, res, next) => {
                 next();
             }
             else{
-                res.status(500).json({msg: err.message});
+                return res.status(500).json(new ApiError(500, err.message));
             }
         }
     }
